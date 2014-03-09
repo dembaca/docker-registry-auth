@@ -18,7 +18,7 @@ ServerName registry.dockzero.io
  ProxyPass          /  http://${REGISTRY_PORT_5000_TCP_ADDR}:${REGISTRY_PORT_5000_TCP_PORT}/
  ProxyPassReverse   /  http://${REGISTRY_PORT_5000_TCP_ADDR}:${REGISTRY_PORT_5000_TCP_PORT}/
 
- <Proxy *>
+<Location />
        AuthType Basic
        AuthName "Dockzero Registry"
        AuthBasicProvider ldap
@@ -28,5 +28,15 @@ ServerName registry.dockzero.io
        AuthLDAPBindDN cn=dk0reader,ou=Security,dc=accounts,dc=dg-i,dc=net
        AuthLDAPBindPassword ${LDAP_READER_PWD}
        require ldap-attribute isMemberOf=DK0-app-registry
- </Proxy>
+ </Location>
+ <Location /_ping>
+        order deny,allow
+        allow from all
+        satisfy any
+ </Location>
+ <Location /v1/_ping>
+        order deny,allow
+        allow from all
+        satisfy any
+ </Location>
  </VirtualHost>
