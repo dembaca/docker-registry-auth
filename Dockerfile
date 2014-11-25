@@ -2,9 +2,9 @@
 #
 # VERSION 0.0.1
 
-FROM ubuntu:13.04
+FROM ubuntu:14.04
 
-MAINTAINER Tim Schindler
+MAINTAINER Andreas Dembach
 
 RUN apt-get update
 RUN apt-get -y install apache2
